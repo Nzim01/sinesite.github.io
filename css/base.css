@@ -5,6 +5,11 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 	box-sizing: border-box;
 }
 
+@font-face {
+	font-family: 'ivymode';
+	src: url(../fonts/IvyMode-Bold.ttf);
+}
+
 .debug {
 	transform: scale(0.5);
 }
@@ -28,9 +33,11 @@ body {
 	--color-link: #838288;
 	--color-link-hover: #000;
 	--color-number: #000;
-	--color-title: #000;
+	--color-title: #bb3a3a;
+	/* --color-title: #000; */
 	--color-caption: #000;
 	--color-content: #000;
+	/*  */
 	--color-content-bg: var(--color-bg);
 	--color-reveal-bg: var(--color-bg);
 	color: var(--color-text);
@@ -263,7 +270,7 @@ main {
 
 .grid--titles {
 	align-items: center;
-	text-align: center;	
+	text-align: center;
 	cursor: default;
 }
 
@@ -287,7 +294,7 @@ main {
 
 .grid__item--slide {
 	flex-direction: column;
-	width: 100%;	
+	width: 100%;
 }
 
 .grid__item--title {
@@ -335,7 +342,7 @@ main {
     text-stroke: 1.5px var(--color-number);
     -webkit-text-fill-color: transparent;
     text-fill-color: transparent;
-    color: transparent;	
+    color: transparent;
     line-height: 1;
     margin: 0 0 0.5rem 0;
     font-weight: 700;
