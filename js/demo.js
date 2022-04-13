@@ -4,14 +4,14 @@
  *
  * Licensed under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
- * 
+ *
  * Copyright 2019, Codrops
  * http://www.codrops.com
  */
 {
     const MathUtils = {
         lineEq: (y2, y1, x2, x1, currentVal) => {
-            // y = mx + b 
+            // y = mx + b
             var m = (y2 - y1) / (x2 - x1), b = y1 - m * x1;
             return m * currentVal + b;
         },
@@ -63,7 +63,7 @@
             return new Promise((resolve, reject) => {
                 const tx = direction === 'left' ? '+=' + val*-1 : '+=' + val;
                 const duration = 1.2;
-                
+
                 new TimelineMax({onComplete: resolve})
                 .to(this.DOM.imgWrap, duration, {
                     x: tx,
@@ -76,7 +76,7 @@
                 .to(this.DOM.imgWrap, duration*.5, {
                     scaleX: 1,
                     ease: Quart.easeOut
-                }, duration*.5) 
+                }, duration*.5)
                 .to(this.DOM.number, duration*.95, {
                     x: tx,
                     ease: Quint.easeInOut
@@ -186,7 +186,7 @@
             return new Promise((resolve, reject) => {
                 const time = MathUtils.randomNumber(0,50)/500;
                 this.elemsTimeline = new TimelineMax({onComplete: resolve});
-                
+
                 if ( this.isCenter ) {
                     const contentItemTitle = contentItem.querySelector('.content__item-header-title');
                     const contentItemImg = contentItem.querySelector('.img--content');
@@ -257,7 +257,7 @@
                 center: document.querySelector('.grid__item--center'),
                 right: document.querySelector('.grid__item--right')
             };
-            
+
             this.setVisibleSlides();
             this.calculateGap();
             this.initEvents();
@@ -284,9 +284,9 @@
             this.leftSlide = this.slides[this.center-1 >= 0 ? this.center-1 : this.slidesTotal-1];
             this.centerSlide.setCenter();
             this.rightSlide.setRight();
-            this.leftSlide.setLeft(); 
+            this.leftSlide.setLeft();
         }
-        // Distance between 2 slides 
+        // Distance between 2 slides
         // The amount to translate the elements that move when we navigate the slideshow
         calculateGap() {
             const pickAGoodSlide = this.center === this.slidesTotal - 1 ? this.center - 1 : this.center;
@@ -298,10 +298,10 @@
         initEvents() {
             this.clickRightFn = () => this.navigate('right');
             this.DOM.interaction.right.addEventListener('click', this.clickRightFn);
-            
+
             this.clickLeftFn = () => this.navigate('left');
             this.DOM.interaction.left.addEventListener('click', this.clickLeftFn);
-            
+
             this.clickCenterFn = () => this.openSlide();
             this.DOM.interaction.center.addEventListener('click', this.clickCenterFn);
 
@@ -348,13 +348,13 @@
                 return false;
             }
             this.isAnimating = true;
-            
-            const upcomingPos = direction === 'right' ? 
+
+            const upcomingPos = direction === 'right' ?
                     this.center < this.slidesTotal-2 ? this.center+2 : Math.abs(this.slidesTotal-2-this.center):
                     this.center >= 2 ? this.center-2 : Math.abs(this.slidesTotal-2+this.center);
 
             // Update current.
-            this.center = direction === 'right' ? 
+            this.center = direction === 'right' ?
                     this.center < this.slidesTotal-1 ? this.center+1 : 0 :
                     this.center > 0 ? this.center-1 : this.slidesTotal-1;
 
@@ -363,7 +363,7 @@
             // Position upcomingSlide / upcomingTitle
             TweenMax.set(this.upcomingSlide.DOM.el, {x: direction === 'right' ? this.gap*2 : -1*this.gap*2, opacity: 1});
             TweenMax.set(this.upcomingTitle, {x: direction === 'right' ? this.gap*2 : -1*this.gap*2, opacity: 1});
-            
+
             const movingSlides = [this.upcomingSlide, this.centerSlide, this.rightSlide, this.leftSlide];
             let promises = [];
             movingSlides.forEach(slide => promises.push(slide.move(direction === 'right' ? 'left' : 'right', this.gap)));
@@ -394,7 +394,7 @@
             const movingSlides = [this.centerSlide, this.rightSlide, this.leftSlide];
             let promises = [];
             movingSlides.forEach(slide => promises.push(slide[action === 'open' ? 'animateElementsOut' : 'animateElementsIn'](contentItem)));
-            
+
             if ( action === 'open' ) {
                 contentItem.classList.add('content__item--current');
             }
@@ -422,8 +422,145 @@
 
     // Preload all the images in the page
     imagesLoaded(document.querySelectorAll('.img'), {background: true}, () => document.body.classList.remove('loading'));
-    
+
     [...document.querySelectorAll('.frame__mode input[type="radio"]')].forEach(radio => radio.addEventListener('click', () => {
         document.body.classList[radio.parentNode.classList.contains('frame__mode-item--dark') ? 'add' : 'remove']('dark-mode');
     }));
+
+
+    // MODAL ==========
+    // REA
+    // Get the modal
+    var rea = document.getElementById("rea");
+
+    // Get the button that opens the modal
+    var reaBtn = document.getElementById("reaBtn");
+
+    // Get the <span> element that closes the modal
+    var reaSpan = document.getElementsByClassName("reaClose")[0];
+
+    // When the user clicks on the button, open the modal
+    reaBtn.onclick = function() {
+      rea.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    reaSpan.onclick = function() {
+      rea.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == rea) {
+        rea.style.display = "none";
+      }
+    }
+
+    // GOLDEN CAVITY
+    // Get the modal
+    var gcav = document.getElementById("gcav");
+
+    // Get the button that opens the modal
+    var gcavBtn = document.getElementById("gcavBtn");
+
+    // Get the <span> element that closes the modal
+    var gcavSpan = document.getElementsByClassName("gcavClose")[0];
+
+    // When the user clicks on the button, open the modal
+    gcavBtn.onclick = function() {
+      gcav.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    gcavSpan.onclick = function() {
+      gcav.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == gcav) {
+        gcav.style.display = "none";
+      }
+    }
+
+    // MAGUGU
+    // Get the modal
+    var magugu = document.getElementById("magugu");
+
+    // Get the button that opens the modal
+    var maguguBtn = document.getElementById("maguguBtn");
+
+    // Get the <span> element that closes the modal
+    var maguguSpan = document.getElementsByClassName("maguguClose")[0];
+
+    // When the user clicks on the button, open the modal
+    maguguBtn.onclick = function() {
+      magugu.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    maguguSpan.onclick = function() {
+      magugu.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == magugu) {
+        magugu.style.display = "none";
+      }
+    }
+
+    // KERBY
+    // Get the modal
+    var kerby = document.getElementById("kerby");
+
+    // Get the button that opens the modal
+    var kerbyBtn = document.getElementById("kerbyBtn");
+
+    // Get the <span> element that closes the modal
+    var kerbySpan = document.getElementsByClassName("kerbyClose")[0];
+
+    // When the user clicks on the button, open the modal
+    kerbyBtn.onclick = function() {
+      kerby.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    kerbySpan.onclick = function() {
+      kerby.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == kerby) {
+        kerby.style.display = "none";
+      }
+    }
+
+    // ADIDAS
+    // Get the modal
+    var adidas = document.getElementById("adidas");
+
+    // Get the button that opens the modal
+    var adidasBtn = document.getElementById("adidasBtn");
+
+    // Get the <span> element that closes the modal
+    var adidasSpan = document.getElementsByClassName("adidasClose")[0];
+
+    // When the user clicks on the button, open the modal
+    adidasBtn.onclick = function() {
+      adidas.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    adidasSpan.onclick = function() {
+      adidas.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == adidas) {
+        adidas.style.display = "none";
+      }
+    }
 }
